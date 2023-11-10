@@ -6,10 +6,26 @@ public class User {
 	private double income;
 	private ExpenseType[] nodes;
 	
-	public User(String username, String password) {
+	public User(String username, String password, double income) {
 		this.username = username;
 		this.password = password;
-		income = 0;
+		this.income = income;
+		this.nodes = new ExpenseType[0];
+	}
+	
+	public User(User u) {
+		if(u == null) {
+			return;
+		}
+		this.username = u.getUsername();
+		this.password = u.getPassword();
+		this.income = u.getIncome();
+		if(u.getNodes() != null) {
+			for(int i = 0; i < u.getNodes().length; i++) {
+				this.newNode(u.getNodes()[i].getName(), u.getNodes()[i].getGoal());
+			}
+		}
+		this.nodes = new ExpenseType[0];
 	}
 	
 	public void newIncome(double amount) {
@@ -48,6 +64,10 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public void newExpense(int index, double amount) {
+		nodes[index].newExpense(amount);
 	}
 	
 	public ExpenseType[] getNodes() {

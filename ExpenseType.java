@@ -39,4 +39,9 @@ public class ExpenseType {
 	public double getExpenses() {
 		return expenses;
 	}
+	
+	public String toString() {
+		String str = name + "\nGoal: " + goal + "\nExpenses: " + expenses;
+		return str;
+	}
 }
