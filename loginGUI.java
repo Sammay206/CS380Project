@@ -8,7 +8,12 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
@@ -18,8 +23,9 @@ public class loginGUI {
 
 	private JFrame frame;
 	private JTextField uName;
-	private JTextField password;
-	private JPasswordField passwordField;
+	private JTextField passwordField;
+	private boolean returnU = false; 
+	private boolean newU = false; 
 
 	/**
 	 * Launch the application.
@@ -82,18 +88,54 @@ public class loginGUI {
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		
-		passwordField = new JPasswordField();
+		passwordField = new JtextField();
 		passwordField.setBounds(189, 106, 130, 26);
 		frame.getContentPane().add(passwordField);
 		
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New User");
-		rdbtnNewRadioButton.setBounds(239, 144, 141, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		JRadioButton newUserRButton = new JRadioButton("New User");
+		newUserRButton.setBounds(239, 144, 141, 23);
+		frame.getContentPane().add(newUserRButton);
+		newUserRButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newU = true;
+			}
+		});
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Returning User");
-		rdbtnNewRadioButton_1.setBounds(107, 144, 141, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		JRadioButton returnUser = new JRadioButton("Returning User");
+		returnUser.setBounds(107, 144, 141, 23);
+		frame.getContentPane().add(returnUser);
+		returnUser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				returnU = true;
+			}
+		});
+		
+		JButton enterButton = new JButton("Enter");
+		enterButton.setBounds(158, 194, 117, 29);
+		frame.getContentPane().add(enterButton);
+		enterButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(returnU == true) { 
+					//need to find a way to find a returning user without have to create a new user
+					//we can use the uName and passwordFields to find them if we create a method or something
+					 User returnUser = new User(uName.getText(), passwordField.getText()); 
+				} 
+				if(newU == true){
+					User newUser = new User(uName.getText(), passwordField.getText());
+				}
+			}
+
+		});
+		
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(newUserRButton);
+		group.add(enterButton);
+		group.add(returnUser);
 		
 	}
 }
