@@ -1,4 +1,4 @@
-package bankingapp;
+package project380;
 
 public class User {
 	private String username;

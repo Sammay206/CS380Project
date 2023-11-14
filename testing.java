@@ -1,4 +1,4 @@
-package bankingapp;
+package 380project;
 
 import java.util.ArrayList;
 import java.util.Scanner;

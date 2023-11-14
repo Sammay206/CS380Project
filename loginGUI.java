@@ -9,12 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -24,8 +25,8 @@ public class loginGUI {
 	private JFrame frame;
 	private JTextField uName;
 	private JTextField passwordField;
-	private boolean returnU = false; 
 	private boolean newU = false; 
+	private User currentUser;
 
 	/**
 	 * Launch the application.
@@ -65,7 +66,7 @@ public class loginGUI {
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
 		
-		JLabel title = DefaultComponentFactory.getInstance().createTitle("Welcome!");
+		JLabel title = new JLabel("Welcome!");
 		title.setBounds(150, 30, 80, 13);
 		panel.add(title);
 		
@@ -88,7 +89,7 @@ public class loginGUI {
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		
-		passwordField = new JtextField();
+		passwordField = new JTextField();
 		passwordField.setBounds(189, 106, 130, 26);
 		frame.getContentPane().add(passwordField);
 		
@@ -109,7 +110,7 @@ public class loginGUI {
 		returnUser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				returnU = true;
+				newU = true;
 			}
 		});
 		
@@ -119,14 +120,11 @@ public class loginGUI {
 		enterButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(returnU == true) { 
-					//need to find a way to find a returning user without have to create a new user
-					//we can use the uName and passwordFields to find them if we create a method or something
-					 User returnUser = new User(uName.getText(), passwordField.getText()); 
-				} 
 				if(newU == true){
-					User newUser = new User(uName.getText(), passwordField.getText());
+					User tempUser = new User(uName.getText(), passwordField.getText(), 0);
+					Database.storeUser(tempUser);
 				}
+				currentUser = new User(Database.getUser(uName.getText(), passwordField.getText()));
 			}
 
 		});
