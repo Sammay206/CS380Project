@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -55,6 +57,7 @@ public class loginGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Database.connection();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setTitle("Budget App");
@@ -110,7 +113,7 @@ public class loginGUI {
 		returnUser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				newU = true;
+				newU = false;
 			}
 		});
 		
@@ -120,15 +123,35 @@ public class loginGUI {
 		enterButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.print(newU);
 				if(newU == true){
 					User tempUser = new User(uName.getText(), passwordField.getText(), 0);
 					Database.storeUser(tempUser);
 				}
+				
 				currentUser = new User(Database.getUser(uName.getText(), passwordField.getText()));
+				
+				//retrieve the expense types for this user from the database
+				ArrayList<Double> expenses = new ArrayList<Double>();
+				for(int i = 0; i < Database.getExpenseTypesForUser(currentUser).size(); i+=3) {
+					String name = (String) Database.getExpenseTypesForUser(currentUser).get(i);
+					double goal = (Double) Database.getExpenseTypesForUser(currentUser).get(i+1);
+					expenses.add((Double) Database.getExpenseTypesForUser(currentUser).get(i+2));
+					
+					currentUser.newNode(name, goal);
+				}
+				
+				for(int i = 0; i < currentUser.getNodes().length; i++) {
+					currentUser.newExpense(i, expenses.get(i));
+				}
+				
+				
+				if(currentUser.getUsername() != null) {
+					MainPageGUI m = new MainPageGUI(currentUser);
+				}
 			}
 
 		});
-		
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(newUserRButton);

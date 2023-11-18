@@ -20,11 +20,6 @@ public class User {
 		this.username = u.getUsername();
 		this.password = u.getPassword();
 		this.income = u.getIncome();
-		if(u.getNodes() != null) {
-			for(int i = 0; i < u.getNodes().length; i++) {
-				this.newNode(u.getNodes()[i].getName(), u.getNodes()[i].getGoal());
-			}
-		}
 		this.nodes = new ExpenseType[0];
 	}
 	

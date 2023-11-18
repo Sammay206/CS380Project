@@ -1,4 +1,4 @@
-package 380project;
+package project380;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -50,8 +50,7 @@ public class testing {
 			currentUser.newExpense(i, expenses.get(i));
 		}
 		
-		//remove the user from the database to be added back later updated
-		Database.removeUser(currentUser);
+		
 		
 		//ask the user what they would like to do
 		System.out.print("Would you like to 1: Print all your expense types"
@@ -61,10 +60,8 @@ public class testing {
 		switch(inputActivity) {
 		case 1:
 			//print the expense types stored for the user with the given username
-			for(int i = 0; i < currentUser.getNodes().length; i+=3) {
+			for(int i = 0; i < currentUser.getNodes().length; i++) {
 				System.out.print(currentUser.getNodes()[i] + " ");
-				System.out.print(currentUser.getNodes()[i+1] + " ");
-				System.out.print(currentUser.getNodes()[i+2] + " ");
 				System.out.print("\n");
 			}
 			break;
@@ -98,6 +95,7 @@ public class testing {
 		}
 		
 		//save the user data to the database
+		Database.removeUser(currentUser);
 		Database.storeUser(currentUser);
 		for (int i = 0; i < currentUser.getNodes().length; i++) {
 			Database.storeExpenseType(currentUser.getNodes()[i], currentUser.getUsername());
