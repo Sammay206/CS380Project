@@ -1,34 +1,82 @@
 package project380;
-import javax.swing.JFrame; 
+import javax.swing.JComponent;
+
 import java.awt.color.*;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-public class squareGUI extends JFrame{
+public class squareGUI extends JComponent{
 	
-	String squareColor; 
-	int xPos = 0;
-	int yPos =0;
-	squareGUI(String color, int x, int y){
-		squareColor = color;
-		xPos = x;
-		yPos = y;
-		setSize(1000,1000);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	String color; 
+	String [] colors = new String[6];
+	ExpenseType[] expenseString; 
+	
+	
+	squareGUI(String[] arrColor, ExpenseType[] temp){
+		colors = arrColor;
+		expenseString = temp;
+	}
+	
+	public void colorSwitch(Graphics g, String newColor) {
+		switch(newColor) {
+		case "red":
+			g.setColor(Color.red);
+			break; 
+		case "green":
+			g.setColor(Color.green);
+			break; 
+		case "yellow":
+			g.setColor(Color.yellow);
+			break;
+	}
 	}
 	
 	public void paint(Graphics g) {
 		
-	switch(squareColor) {
-		case "red": g.setColor(Color.red);
-			          break; 
-		case "green": g.setColor(Color.green);
-		          	break; 
-		case "yellow": g.setColor(Color.yellow);
-			          break;
+	Graphics2D g2 = (Graphics2D) g;	
+	
+	for(int i =0; i < colors.length; i++) {
+		//should draw the square with hard coded positions with labels of ExpenseType 
+		switch(i) {
+		case 0: 
+			//Square 1 
+			g2.drawString(expenseString[i].toString(), 115, 150);
+			colorSwitch(g2,colors[i]);
+			g2.fillRect(100, 100, 200, 200);
+			break; 
+		case 1:
+			//Square 2
+			g2.drawString(expenseString[i].toString(), 325, 150);
+			colorSwitch(g2, colors[i]);
+			g2.fillRect(310, 100, 200, 200);
+			break;
+		case 2:
+			//Square 3
+			g2.drawString(expenseString[i].toString(), 525, 150);
+			colorSwitch(g2, colors[i]);
+			g2.fillRect(510, 100, 200, 200);
+			break;
+		case 3:
+			//Square 4
+			g2.drawString(expenseString[i].toString(), 115, 410);
+			colorSwitch(g2, colors[i]);
+			g2.fillRect(100, 310, 200, 200);
+			break;
+		case 4:
+			//Square 5
+			g2.drawString(expenseString[i].toString(), 325, 410);
+			colorSwitch(g2, colors[i]);
+			g2.fillRect(310, 310, 200, 200);
+			break;
+		case 5:
+			//Square 6
+			g2.drawString(expenseString[i].toString(), 525, 410);
+			colorSwitch(g2, colors[i]);
+			g2.fillRect(510, 310, 200, 200);
+			break;
+		}
 	}
-		g.fillRect(xPos,yPos,200,200);
 	} 
 
 }
