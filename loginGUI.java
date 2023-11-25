@@ -144,10 +144,29 @@ public class loginGUI {
 				for(int i = 0; i < currentUser.getNodes().length; i++) {
 					currentUser.newExpense(i, expenses.get(i));
 				}
-				
-				
+			
 				if(currentUser.getUsername() != null) {
-					MainPageGUI m = new MainPageGUI(currentUser);
+					for(int i = 0; i < currentUser.getNodes().length; i++) {
+						System.out.print(currentUser.getNodes()[i] + " ");
+						System.out.print("\n");
+					}
+					//Checking if the array of currentUser is bigger 
+					//than the length of the color and expenseType array
+					if(currentUser.getNodes().length > 6) {
+						for(int i=0; i < 6; i++) {
+							colors[i] = currentUser.getNodes()[i].evaluateGoal();
+							temp[i] = currentUser.getNodes()[i];
+						}
+						
+					} else {
+		
+						for(int i =0; i < currentUser.getNodes().length; i++) {
+							colors[i] = currentUser.getNodes()[i].evaluateGoal();
+							temp[i] = currentUser.getNodes()[i];
+						}
+					}
+					//leads to the mainFace class to start the squares Dashboard
+					mainFace dash = new mainFace(colors, temp, currentUser);
 				}
 			}
 
