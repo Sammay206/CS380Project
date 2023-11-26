@@ -3,9 +3,12 @@ package project380;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MainPageGUI {
@@ -37,7 +40,7 @@ public class MainPageGUI {
 		initialize();
 	}
 
-	/**
+	/*
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
@@ -65,8 +68,22 @@ public class MainPageGUI {
 		//sending colors and array of ExpenseType to squareGUI
 		squareGUI s1 = new squareGUI(colors, temp);
 		//should create more than 1 square if there are more than 1 expense in array
-		frame.add(s1);	
+		frame.add(s1);	*/
 
+		/*A button to that creates a second window that will allow 
+		the user to add a new income, a new expense type, or a 
+		new expense.
+		JButton plusButton = new JButton("+");
+		plusButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		plusButton.setBounds(770, 450, 70, 70);
+		frame.getContentPane().add(plusButton);
+		plusButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addGUI add = new addGUI();
+			}
+		});
+		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
