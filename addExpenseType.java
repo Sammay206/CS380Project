@@ -56,7 +56,7 @@ public class addExpenseType {
 		textFieldName.setBounds(225, 110, 80, 20);
 		frame.getContentPane().add(textFieldName);
 		
-		JLabel lblGoal = new JLabel("Expense");
+		JLabel lblGoal = new JLabel("Goal");
 		lblGoal.setBounds(130, 150, 60, 20);
 		frame.getContentPane().add(lblGoal);
 		

@@ -154,6 +154,7 @@ public class loginGUI {
 					//leads to the mainFace class to start the squares Dashboard
 					@SuppressWarnings("unused")
 					mainFace dash = new mainFace(currentUser);
+					frame.dispose();
 				}
 			}
 
