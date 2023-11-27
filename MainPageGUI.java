@@ -1,12 +1,10 @@
 package project380;
 
-import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.ArrayList;
 
 public class MainPageGUI {
 
@@ -63,7 +61,7 @@ public class MainPageGUI {
 			colors[y] = temp[y].evaluateGoal();
 		}
 		//sending colors and array of ExpenseType to squareGUI
-		squareGUI s1 = new squareGUI(colors, temp);
+		squareGUI s1 = new squareGUI(colors, temp, currentUser);
 		//should create more than 1 square if there are more than 1 expense in array
 		frame.add(s1);	
 
