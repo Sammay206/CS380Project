@@ -76,6 +76,12 @@ public class addExpenseGUI {
 				
 				currentUser.getNodes()[cbExpenseTypes.getSelectedIndex()].newExpense(Double.valueOf(textFieldExpense.getText()));
 				
+				Database.removeUser(currentUser);
+				Database.storeUser(currentUser);
+				for (int i = 0; i < currentUser.getNodes().length; i++) {
+					Database.storeExpenseType(currentUser.getNodes()[i], currentUser.getUsername());
+				}
+				
 				mainFace.frame.dispose();
 				mainFace m = new mainFace(currentUser);
 				frame.dispose();
